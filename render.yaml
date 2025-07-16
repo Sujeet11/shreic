@@ -1,20 +1,20 @@
 services:
   - type: web
-    name: shreic-app
+    name: shreic
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn shreic.wsgi:application"
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn shreic.wsgi:application
+    autoDeploy: true
     envVars:
+      - key: SECRET_KEY
+        value: django-insecure-=3q)#6r@)wnbti=soe**-bm8ulc1x!43v-iz(*1qyjm2r@i$^e
+      - key: DEBUG
+        value: False
       - key: DJANGO_SETTINGS_MODULE
         value: shreic.settings
-      - key: SECRET_KEY
-        value: your-secret-key-here
       - key: DATABASE_URL
         fromDatabase:
           name: shreic-db
           property: connectionString
-
-databases:
-  - name: shreic-db
-    databaseName: shreic
-    user: shreic_user
+    postDeployCommand: |
+      python manage.py migrate
