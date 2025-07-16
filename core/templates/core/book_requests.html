@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h3>Requested Books</h3>
+
+{% if requests %}
+  <ul class="list-group">
+    {% for r in requests %}
+      <li class="list-group-item">
+        <strong>{{ r.title }}</strong> — {{ r.description }}<br>
+        <small class="text-muted">by {{ r.username }} on {{ r.latest_time|date:"M d, H:i" }}</small>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No book requests found.</p>
+{% endif %}
+{% endblock %}

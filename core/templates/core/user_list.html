@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h3>All Users</h3>
+
+<ul class="list-group">
+  {% for u in users %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{ u.username }}
+      <a class="btn btn-sm btn-outline-primary" href="{% url 'chat' u.id %}">Chat</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

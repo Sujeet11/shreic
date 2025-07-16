@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h3>My Chats</h3>
+
+{% if inbox %}
+  <ul class="list-group">
+    {% for entry in inbox %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ entry.other_user.username }}</strong><br>
+          {% if entry.last_msg %}
+            <small class="text-muted">{{ entry.last_msg.message|truncatechars:40 }}</small>
+          {% else %}
+            <small class="text-muted fst-italic">No messages yet</small>
+          {% endif %}
+        </div>
+        <a class="btn btn-sm btn-outline-primary" href="{% url 'chat' entry.other_user.id %}">Open</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No chats yet.</p>
+{% endif %}
+{% endblock %}

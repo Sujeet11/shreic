@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>Uploaded Books</h2>
+
+{% for book in books %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5>{{ book.title }}</h5>
+      <p><strong>Author:</strong> {{ book.author }}</p>
+      <p><strong>Seller:</strong> {{ book.seller.username }}</p>
+
+      <!-- ✅ Step 6: Chat Button -->
+      <a class="btn btn-outline-primary" href="{% url 'chat' book.seller.id %}">Chat with Seller</a>
+      <a class="btn btn-sm btn-outline-secondary" href="{% url 'add_to_cart' book.id %}">Add to Cart</a>
+
+    </div>
+  </div>
+{% empty %}
+  <p>No books uploaded yet.</p>
+{% endfor %}
+{% endblock %}

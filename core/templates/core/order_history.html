@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h3>📦 Order History</h3>
+
+<h5>🧾 My Orders (Placed)</h5>
+{% if my_orders %}
+  <ul class="list-group mb-4">
+    {% for order in my_orders %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ order.book.title }} from {{ order.seller.username }} —
+        <span class="badge bg-info text-dark">{{ order.status }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No orders placed yet.</p>
+{% endif %}
+
+<h5>📤 Orders Received (Selling)</h5>
+{% if received_orders %}
+  <ul class="list-group">
+    {% for order in received_orders %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ order.book.title }} ordered by {{ order.buyer.username }} —
+        <span class="badge bg-warning text-dark">{{ order.status }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No orders received yet.</p>
+{% endif %}
+{% endblock %}
